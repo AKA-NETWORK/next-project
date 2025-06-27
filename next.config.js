@@ -22,7 +22,19 @@ module.exports = {
     
     return config;
   },
-  // Add experimental edge support
+  //// next.config.js
+module.exports = {
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      config.externals = [
+        ...(config.externals || []),
+        'bufferutil',
+        'utf-8-validate'
+      ];
+    }
+    return config;
+  },
+}; Add experimental edge support
   experimental: {
     serverActions: true,
     edge: true
